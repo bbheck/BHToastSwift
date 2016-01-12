@@ -1,0 +1,6 @@
+framework module BHToast {
+  umbrella header "BHToast-umbrella.h"
+
+  export *
+  module * { export * }
+}
