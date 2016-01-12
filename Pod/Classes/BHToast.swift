@@ -8,24 +8,37 @@
 
 import UIKit
 
+/// The BHToast class defines a custom UIView with a message.
 public class BHToast: UIView {
     
+    // MARK: - Properties
+    
+    /// The parent UIView that shows the BHToast.
     private let view: UIView!
+
+    /// The reference of BHToastOptions.
+    private let options = BHToastOptions.self
     
-    /// The time duration animation
-    private var animationDuration: NSTimeInterval!
+    /// The animation time.
+    private let animationDuration: NSTimeInterval!
     
-    /// The duration that the Toast stays in View.
-    private var duration: NSTimeInterval = 5.0
-    
-    private var timer = NSTimer()
-    
+    /// The BHToast width.
     private let width: CGFloat = 300.0
-    private let height: CGFloat = 80.0
-    private let bottomOffset: CGFloat = 30.0
     
+    /// The display message.
     private(set) var message: String
     
+    // MARK: - Init methods
+    
+    /**
+     Custom init method.
+     
+     Create an instance of BHToast to attach in an UIView. You should set a message to display and can change the animation duration.
+     
+     - parameter view:              The UIView that shows the BHToast.
+     - parameter message:           The display message.
+     - parameter animationDuration: The animation time.
+     */
     public init(view: UIView, message: String, animationDuration: NSTimeInterval = 1.0) {
         self.view = view
         self.message = message
@@ -34,77 +47,103 @@ public class BHToast: UIView {
         super.init(
             frame: CGRect(
                 x: 0,
-                y: view.frame.size.height - (height + bottomOffset),
+                y: 0,
                 width: width,
-                height: height
+                height: BHToastOptions.height
             )
         )
         
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
-        
-        layer.cornerRadius = 5.0
-        layer.masksToBounds = true
-        
-        layer.borderWidth = 1.0
-        layer.borderColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6).CGColor
-        
-        setupMessageLabel()
+        setupViewProperties()
     }
 
+    @available(*, unavailable, message="required init is unavailable")
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func drawRect(rect: CGRect) {
+    // MARK: - Override method
+    
+    override public func drawRect(rect: CGRect) {
         super.drawRect(rect)
         
         addWidthConstraintWithRule("\(width)")
-        addHeightConstraintWithRule("\(height)")
+        addHeightConstraintWithRule("\(BHToastOptions.height)")
         
         addAlignCenterXConstraintToElement()
-        addBottomMarginConstraintToElement(bottomOffset)
+        addBottomMarginConstraintToElement(options.bottomOffset)
+        
+        setupMessageLabel()
     }
     
+    // MARK: - Setup methods
+    
+    /**
+     Sets the view properties.
+     */
+    private func setupViewProperties() {
+        
+        tag = BHToastOptions.viewTag
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        backgroundColor = options.backgroundColor
+        
+        layer.borderWidth = options.borderWidth
+        layer.borderColor = options.borderColor.CGColor
+        
+        layer.cornerRadius = options.cornerRadius
+        
+        layer.masksToBounds = true
+    }
+    
+    /**
+     Sets the message label properties.
+     */
     private func setupMessageLabel() {
+        // TODO: Use autolayout to setup the label frame.
         let label = UILabel(
             frame: CGRect(
-                x: 10,
-                y: 10,
-                width: width - 20,
-                height: height - 20
+                x: BHToastOptions.messagePadding,
+                y: BHToastOptions.messagePadding,
+                width: frame.width - (BHToastOptions.messagePadding * 2),
+                height: frame.height - (BHToastOptions.messagePadding * 2)
             )
         )
         
-        label.textColor = UIColor.whiteColor()
+        label.font = options.messageFont
         
-        label.numberOfLines = 2
-        label.textAlignment = .Center
+        label.numberOfLines = 0
         
-        label.font = UIFont.systemFontOfSize(19.0)
         label.text = message
+        label.textAlignment = .Center
+        label.textColor = options.messageColor
         
         addSubview(label)
     }
     
-    private func startTimer() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(
-            duration,
-            target: self,
-            selector: "close",
-            userInfo: nil,
-            repeats: false
-        )
+    // MARK: - Event method
+    
+    private func dispatchHideEvent() {
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(options.duration * Double(NSEC_PER_SEC)))
+        dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
+            self.hide()
+        })
     }
     
-    func close() {
+    
+    // MARK: - Public methods
+    
+    /**
+     Hide action.
+     
+     Just "fade out" the BHToast view.
+     */
+    public func hide() {
         UIView.animateWithDuration(
-            1.0,
+            animationDuration,
             animations: { () -> Void in
                 self.alpha = 0.0
             }, completion: { (finish) -> Void in
-                self.timer.invalidate()
                 self.removeFromSuperview()
             }
         )
@@ -112,8 +151,16 @@ public class BHToast: UIView {
     
     /**
      The show method.
+     
+     It's a "fade in" animation with the duration setted in init method.
     */
     public func show() {
+        
+        /// Remove from screen if the BHToast already exists.
+        if let _view = view.viewWithTag(BHToastOptions.viewTag) as? BHToast {
+            _view.hide()
+        }
+        
         alpha = 0.0
         view.addSubview(self)
         
@@ -122,14 +169,17 @@ public class BHToast: UIView {
             animations: { () -> Void in
                 self.alpha = 1.0
             }, completion: { (finish) -> Void in
-                self.startTimer()
+                self.dispatchHideEvent()
             }
         )
     }
     
+    // MARK: - Constraint methods
+    
     /**
-     Align center X constraint
-    */
+     Align center X constraint.
+    
+     */
     func addAlignCenterXConstraintToElement() {
         view.addConstraint(
             NSLayoutConstraint(
@@ -145,12 +195,10 @@ public class BHToast: UIView {
     }
     
     /**
-     Add bottom margin constraint (refers to self.view)
+     Add bottom margin constraint (refers to self.view).
      
      - parameter value: CGFloat
-     
-     - returns: The constraint instance
-    */
+     */
     func addBottomMarginConstraintToElement(value: CGFloat) {
         view.addConstraint(
             NSLayoutConstraint(
@@ -170,9 +218,7 @@ public class BHToast: UIView {
      
      - parameter element: AnyObject
      - parameter rule: String (examples: "<=200", ">300", "200")
-     
-     - returns: The constraint instance
-    */
+     */
     private func addHeightConstraintWithRule(rule: String) {
         addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
@@ -190,9 +236,7 @@ public class BHToast: UIView {
      Add width constraint
      
      - parameter rule: String (examples: "<=200", ">300", "200")
-     
-     - returns: The constraint instance
-    */
+     */
     private func addWidthConstraintWithRule(rule: String) {
         addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat(
