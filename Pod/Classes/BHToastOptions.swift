@@ -26,10 +26,10 @@ public struct BHToastOptions {
     
     // View size options
     public static var height: CGFloat = 50.0
-    public static var bottomOffset: CGFloat = 20.0
+    public static var bottomOffset: CGFloat = 8.0
     
     // Message options
-    public static var messagePadding: CGFloat = 10.0
+    public static var messagePadding: CGFloat = 8.0
     
     public static var messageFont = UIFont.systemFontOfSize(14.0)
     public static var messageColor = UIColor.whiteColor()
