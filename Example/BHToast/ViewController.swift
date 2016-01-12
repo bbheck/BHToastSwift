@@ -8,11 +8,18 @@
 
 import UIKit
 
+import BHToast
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        BHToast(view: self.view, message: "Thanks for use it, you're awesome.").show()
     }
 
     override func didReceiveMemoryWarning() {
