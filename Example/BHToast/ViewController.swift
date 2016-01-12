@@ -12,14 +12,17 @@ import BHToast
 
 class ViewController: UIViewController {
 
+    @IBAction func showToastAction(sender: UIButton) {
+        BHToast(view: self.view, message: "[\(arc4random_uniform(20))] This is an example message.").show()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        BHToast(view: self.view, message: "Thanks for use it, you're awesome.").show()
+
     }
 
     override func didReceiveMemoryWarning() {
