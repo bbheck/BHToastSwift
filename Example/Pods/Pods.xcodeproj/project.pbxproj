@@ -13,6 +13,7 @@
 		0492354DA7EF0C9068F7B4E8F74001B0 /* FailureMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14E97EFA39EE5B8E0791218121044BD /* FailureMessage.swift */; };
 		0A6E71555F55082003A3DB2B03CA85D2 /* AsyncMatcherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 130A59DDB32BBDCFB4ABB11FA368C7F8 /* AsyncMatcherWrapper.swift */; };
 		0B7C6B4D1C448194008E2035 /* BHToast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7C6B4C1C448194008E2035 /* BHToast.swift */; };
+		0BB408651C45479A004783F8 /* BHToastOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB408641C45479A004783F8 /* BHToastOptions.swift */; };
 		0F49254A4C560DD4696936F6080756DC /* Nimble-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A7503AAF3BA8144C1103305BE6E6A9 /* Nimble-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1182D9E9697D7267D9D4C08EFD509182 /* NimbleSnapshotsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE77204D4845498864080BE9D314C76 /* NimbleSnapshotsConfiguration.swift */; };
 		163AAB26AA9500ED2C3892424473949D /* BHToast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 917C991BF41D8C06C86B775D4268F6F6 /* BHToast-dummy.m */; };
@@ -201,6 +202,7 @@
 		049E62DBC02E79C4174E7BE9678BA37E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0523FA797BFE4A9B57B15EF042AA5816 /* Pods_BHToast_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BHToast_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B7C6B4C1C448194008E2035 /* BHToast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BHToast.swift; sourceTree = "<group>"; };
+		0BB408641C45479A004783F8 /* BHToastOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BHToastOptions.swift; sourceTree = "<group>"; };
 		0D7D938089484EB492A8626AA8E5C528 /* SuiteHooks.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SuiteHooks.swift; path = Quick/Hooks/SuiteHooks.swift; sourceTree = "<group>"; };
 		0D815E4D0509F64977CC911FFE53B202 /* DSL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DSL.h; path = Nimble/objc/DSL.h; sourceTree = "<group>"; };
 		10AD076B851097DA10B51E31A8E7BE6C /* Functional.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Functional.swift; path = Nimble/Utils/Functional.swift; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 			isa = PBXGroup;
 			children = (
 				0B7C6B4C1C448194008E2035 /* BHToast.swift */,
+				0BB408641C45479A004783F8 /* BHToastOptions.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1105,6 +1108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				163AAB26AA9500ED2C3892424473949D /* BHToast-dummy.m in Sources */,
+				0BB408651C45479A004783F8 /* BHToastOptions.swift in Sources */,
 				0B7C6B4D1C448194008E2035 /* BHToast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
