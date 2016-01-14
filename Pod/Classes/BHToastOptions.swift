@@ -25,7 +25,8 @@ public struct BHToastOptions {
     public static var cornerRadius: CGFloat = 5.0
     
     // View size options
-    public static var height: CGFloat = 50.0
+    public static var minHeight: CGFloat = 30.0
+    public static var maxHeight: CGFloat = 50.0
     public static var bottomOffset: CGFloat = 8.0
     
     // Message options
