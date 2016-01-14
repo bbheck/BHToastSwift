@@ -39,7 +39,7 @@ public class BHToast: UIView {
      - parameter message:           The display message.
      - parameter animationDuration: The animation time.
      */
-    public init(view: UIView, message: String, animationDuration: NSTimeInterval = 1.0) {
+    public init(view: UIView, message: String, animationDuration: NSTimeInterval = 0.4) {
         self.view = view
         self.message = message
         self.animationDuration = animationDuration
@@ -49,7 +49,7 @@ public class BHToast: UIView {
                 x: 0,
                 y: 0,
                 width: width,
-                height: BHToastOptions.height
+                height: BHToastOptions.minHeight
             )
         )
     }
@@ -65,7 +65,8 @@ public class BHToast: UIView {
         super.drawRect(rect)
         
         addWidthConstraintToElement(self, rule: "\(width)")
-        addHeightConstraintToElement(self, rule: "\(BHToastOptions.height)")
+        addHeightConstraintToElement(self, rule: ">=\(BHToastOptions.minHeight)")
+        addHeightConstraintToElement(self, rule: "<=\(BHToastOptions.maxHeight)")
         
         addAlignCenterXConstraintFrom(view, to: self)
         addBottomMarginConstraintFrom(view, to: self, value: options.bottomOffset)
@@ -81,9 +82,9 @@ public class BHToast: UIView {
      */
     private func setupViewProperties() {
         
-        tag = BHToastOptions.viewTag
-        
         translatesAutoresizingMaskIntoConstraints = false
+        
+        tag = BHToastOptions.viewTag
         
         backgroundColor = options.backgroundColor
         
@@ -127,7 +128,6 @@ public class BHToast: UIView {
             self.hide()
         })
     }
-    
     
     // MARK: - Public methods
     
