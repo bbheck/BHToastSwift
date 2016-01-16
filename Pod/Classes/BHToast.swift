@@ -15,18 +15,18 @@ public class BHToast: UIView {
     
     /// The parent UIView that shows the BHToast.
     private let view: UIView!
-
-    /// The reference of BHToastOptions.
-    private let options = BHToastOptions.self
     
     /// The animation time.
     private let animationDuration: NSTimeInterval!
+    
+    /// The view options
+    private let options: BHToastOptions!
     
     /// The BHToast width.
     private let width: CGFloat = 300.0
     
     /// The display message.
-    private(set) var message: String
+    public var message: String
     
     // MARK: - Init methods
     
@@ -38,20 +38,24 @@ public class BHToast: UIView {
      - parameter view:              The UIView that shows the BHToast.
      - parameter message:           The display message.
      - parameter animationDuration: The animation time.
+     - parameter options:           The BHToastOptions instance.
      */
-    public init(view: UIView, message: String, animationDuration: NSTimeInterval = 0.4) {
+    public init(view: UIView, message: String, animationDuration: NSTimeInterval = 0.4, options: BHToastOptions = BHToastOptions()) {
         self.view = view
         self.message = message
         self.animationDuration = animationDuration
+        self.options = options
         
         super.init(
             frame: CGRect(
-                x: 0,
-                y: 0,
+                x: 0.0,
+                y: 0.0,
                 width: width,
-                height: BHToastOptions.minHeight
+                height: options.minHeight
             )
         )
+        
+        setupViewProperties()
     }
 
     @available(*, unavailable, message="required init is unavailable")
@@ -65,29 +69,34 @@ public class BHToast: UIView {
         super.drawRect(rect)
         
         addWidthConstraintToElement(self, rule: "\(width)")
-        addHeightConstraintToElement(self, rule: ">=\(BHToastOptions.minHeight)")
-        addHeightConstraintToElement(self, rule: "<=\(BHToastOptions.maxHeight)")
+        addHeightConstraintToElement(self, rule: ">=\(options.minHeight)")
+        addHeightConstraintToElement(self, rule: "<=\(options.maxHeight)")
         
         addAlignCenterXConstraintFrom(view, to: self)
         addBottomMarginConstraintFrom(view, to: self, value: options.bottomOffset)
         
-        setupViewProperties()
+        setupLayerProperties()
         setupMessageLabel()
     }
     
     // MARK: - Setup methods
     
+    
     /**
      Sets the view properties.
      */
     private func setupViewProperties() {
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        tag = BHToastOptions.viewTag
+        tag = BHToastViewTag
         
         backgroundColor = options.backgroundColor
         
+        translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    /**
+     Sets the layer properties.
+     */
+    private func setupLayerProperties() {
         layer.borderWidth = options.borderWidth
         layer.borderColor = options.borderColor.CGColor
         
@@ -114,10 +123,10 @@ public class BHToast: UIView {
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        addTopMarginConstraintFrom(self, to: label, value: BHToastOptions.messagePadding)
-        addBottomMarginConstraintFrom(self, to: label, value: BHToastOptions.messagePadding)
-        addLeftMarginConstraintFrom(self, to: label, value: BHToastOptions.messagePadding)
-        addRightMarginConstraintFrom(self, to: label, value: BHToastOptions.messagePadding)
+        addTopMarginConstraintFrom(self, to: label, value: options.messagePadding)
+        addBottomMarginConstraintFrom(self, to: label, value: options.messagePadding)
+        addLeftMarginConstraintFrom(self, to: label, value: options.messagePadding)
+        addRightMarginConstraintFrom(self, to: label, value: options.messagePadding)
     }
     
     // MARK: - Event method
@@ -133,9 +142,7 @@ public class BHToast: UIView {
     
     /**
      Hide action.
-     
-     Just "fade out" the BHToast view.
-     */
+    */
     public func hide() {
         UIView.animateWithDuration(
             animationDuration,
@@ -149,13 +156,11 @@ public class BHToast: UIView {
     
     /**
      The show method.
-     
-     It's a "fade in" animation with the duration setted in init method.
     */
     public func show() {
         
         /// Remove from screen if the BHToast already exists.
-        if let _view = view.viewWithTag(BHToastOptions.viewTag) as? BHToast {
+        if let _view = view.viewWithTag(BHToastViewTag) as? BHToast {
             _view.hide()
         }
         
