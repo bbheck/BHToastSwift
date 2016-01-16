@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name          = "BHToast"
   s.version       = "0.2.0"
-  s.summary       = "It's a custom UIView inspired in Android Toast."
+  s.summary       = "BHToast is a custom UIView written in Swift inspired by Android Toast."
   s.homepage      = "https://github.com/bbheck/BHToastSwift"
   s.license       = 'MIT'
   s.author        = { "Bruno Hecktheuer" => "bbheck@gmail.com" }
