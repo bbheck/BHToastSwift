@@ -38,6 +38,8 @@ BHToast(view: view, message: "This is an example message.").show()
 
 ### Customizing
 
+You can create a `BHToastOptions` instance with this properties:
+
 * The time that `BHToast` stays in `UIView`
 ```swift
 duration: NSTimeInterval
