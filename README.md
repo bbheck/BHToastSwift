@@ -95,6 +95,8 @@ messageFont: UIFont
 messageColor: UIColor
 ```
 
+**All this properties have a default value. Change it to apply the customizations to all new `BHToast` instances.**
+
 ## Author
 
 Bruno Hecktheuer, bbheck@gmail.com
