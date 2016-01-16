@@ -26,6 +26,8 @@ pod "BHToast"
 
 ## Usage
 
+<img src="https://cloud.githubusercontent.com/assets/2257294/12374113/f796500a-bc78-11e5-93bc-ac886c3d1f66.gif">
+
 ### Showing a BHToast
 
 ```swift
@@ -36,12 +38,59 @@ BHToast(view: view, message: "This is an example message.").show()
 
 ### Customizing
 
+* The time that `BHToast` stays in `UIView`
 ```swift
-import BHToast
+duration: NSTimeInterval
+```
 
-BHToastOptions.duration = 10.0
-BHToastOptions.backgroundColor = UIColor.whiteColor()
-BHToastOptions.messageColor = UIColor.blackColor()
+* Toast background color
+```swift
+backgroundColor: UIColor
+```
+
+* Border color
+```swift
+borderColor: UIColor
+```
+
+* Border width
+```swift
+borderWidth: CGFloat
+```
+
+* Corner radius
+```swift
+cornerRadius: CGFloat
+```
+
+* The min height
+```swift
+minHeight: CGFloat
+```
+
+* The max height
+```swift
+maxHeight: CGFloat
+```
+
+* The bottom distance
+```swift
+bottomOffset: CGFloat
+```
+
+* The message padding
+```swift
+messagePadding: CGFloat
+```
+
+* The message font
+```swift
+messageFont: UIFont
+```
+
+* The message color
+```swift
+messageColor: UIColor
 ```
 
 ## Author
