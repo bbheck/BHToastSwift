@@ -6,10 +6,6 @@
 [![License](https://img.shields.io/cocoapods/l/BHToast.svg?style=flat)](http://cocoapods.org/pods/BHToast)
 [![Platform](https://img.shields.io/cocoapods/p/BHToast.svg?style=flat)](http://cocoapods.org/pods/BHToast)
 
-## Usage
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
 ## Requirements
 
 - iOS 8.0+
