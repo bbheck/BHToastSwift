@@ -12,8 +12,26 @@ import BHToast
 
 class ViewController: UIViewController {
     
+    @IBAction func showToastWithImage(sender: UIButton) {
+        BHToast(
+            view: view,
+            message: randomMessage,
+            imageView: UIImageView(
+                image: UIImage(
+                    named: "SuccessIcon"
+                )
+            ),
+            options: BHToastOptions(
+                minHeight: 40.0
+            )
+        ).show()
+    }
+    
     @IBAction func showToastAction(sender: UIButton) {
-        BHToast(view: view, message: randomMessage).show()
+        BHToast(
+            view: view,
+            message: randomMessage
+        ).show()
     }
     
     let messages: [String] = [
