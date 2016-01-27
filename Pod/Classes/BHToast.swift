@@ -85,14 +85,18 @@ public class BHToast: UIView {
             rule: "<=\(options.maxHeight)"
         )
         
-        addAlignCenterXConstraintFrom(
+        addConstraintFrom( // Align Center X
             view,
-            to: self
+            fromAttribute: .CenterX,
+            to: self,
+            toAttribute: .CenterX
         )
         
-        addBottomMarginConstraintFrom(
+        addConstraintFrom( // Bottom Margin
             view,
+            fromAttribute: .Bottom,
             to: self,
+            toAttribute: .Bottom,
             value: options.bottomOffset
         )
         
@@ -126,26 +130,35 @@ public class BHToast: UIView {
         layer.masksToBounds = true
     }
     
+    /**
+     Sets the UIImageView properties
+    */
     private func setupImageView() {
         addSubview(imageView!)
         
         imageView!.translatesAutoresizingMaskIntoConstraints = false
         
-        addAlignCenterYConstraintFrom(
+        addConstraintFrom( // Align Center Y
             self,
-            to: imageView!
+            fromAttribute: .CenterY,
+            to: imageView!,
+            toAttribute: .CenterY
         )
         
         if options.imagePosition == .Left {
-            addLeftMarginConstraintFrom(
-                self,
-                to: imageView!,
+            addConstraintFrom( // Left Margin
+                imageView!,
+                fromAttribute: .Left,
+                to: self,
+                toAttribute: .Left,
                 value: options.contentInsets.left
             )
         } else {
-            addRightMarginConstraintFrom(
+            addConstraintFrom( // Right Margin
                 self,
+                fromAttribute: .Right,
                 to: imageView!,
+                toAttribute: .Right,
                 value: options.contentInsets.right
             )
         }
@@ -155,10 +168,14 @@ public class BHToast: UIView {
             rule: "\(options.minHeight - ((options.contentInsets.top + options.contentInsets.bottom) / 2))"
         )
         
-        addRatioConstraintToElement(
+        addConstraintFrom( // Ratio Constraint
             imageView!,
+            fromAttribute: .Height,
+            to: imageView!,
+            toAttribute: .Width,
             multiplier: imageView!.frame.height / imageView!.frame.width
         )
+    
     }
     
     /**
@@ -177,42 +194,52 @@ public class BHToast: UIView {
         
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addTopMarginConstraintFrom(
-            self,
-            to: messageLabel,
+        addConstraintFrom( // Top Margin
+            messageLabel,
+            fromAttribute: .Top,
+            to: self,
+            toAttribute: .Top,
             value: options.contentInsets.top
         )
         
-        addBottomMarginConstraintFrom(
+        addConstraintFrom( // Bottom Margin
             self,
+            fromAttribute: .Bottom,
             to: messageLabel,
+            toAttribute: .Bottom,
             value: options.contentInsets.bottom
         )
         
         if imageView == nil {
-            addLeftMarginConstraintFrom(
-                self,
-                to: messageLabel,
+            addConstraintFrom( // Left Margin
+                messageLabel,
+                fromAttribute: .Left,
+                to: self,
+                toAttribute: .Left,
                 value: options.contentInsets.left
             )
             
-            addRightMarginConstraintFrom(
+            addConstraintFrom( // Right Margin
                 self,
+                fromAttribute: .Right,
                 to: messageLabel,
+                toAttribute: .Right,
                 value: options.contentInsets.right
             )
         } else {
-            addLeftMarginConstraintFrom(
-                options.imagePosition == .Left ? imageView! : self,
-                fromAttribute: options.imagePosition == .Left ? .Right : .Left,
-                to: messageLabel,
+            addConstraintFrom( // Left Margin
+                messageLabel,
+                fromAttribute: .Left,
+                to: options.imagePosition == .Left ? imageView! : self,
+                toAttribute: options.imagePosition == .Left ? .Right : .Left,
                 value: options.contentInsets.left
             )
             
-            addRightMarginConstraintFrom(
+            addConstraintFrom( // Right Margin
                 options.imagePosition == .Right ? imageView! : self,
                 fromAttribute: options.imagePosition == .Right ? .Left : .Right,
                 to: messageLabel,
+                toAttribute: .Right,
                 value: options.contentInsets.right
             )
         }
@@ -268,170 +295,40 @@ public class BHToast: UIView {
     
     // MARK: - Constraint methods
     
-
     /**
-     Align center X constraint.
-     
-     - parameter from:  AnyObject
-     - parameter to:    AnyObject
-     */
-    func addAlignCenterXConstraintFrom(from: AnyObject, to: AnyObject) {
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: from,
-                attribute: .CenterX,
-                relatedBy: .Equal,
-                toItem: to,
-                attribute: .CenterX,
-                multiplier: 1,
-                constant: 0
-            )
-        )
-    }
+     Generic method to add constraint to item.
     
-    /**
-     Align center Y constraint.
-     
-     - parameter from:  AnyObject
-     - parameter to:    AnyObject
-     */
-    func addAlignCenterYConstraintFrom(from: AnyObject, to: AnyObject) {
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: from,
-                attribute: .CenterY,
-                relatedBy: .Equal,
-                toItem: to,
-                attribute: .CenterY,
-                multiplier: 1,
-                constant: 0
-            )
-        )
-    }
-    
-    /**
-     Add top margin constraint.
-     
-     - parameter from:          AnyObject
-     - parameter fromAttribute: NSLayoutAttribute
-     - parameter to:            AnyObject
-     - parameter toAttribute:   NSLayoutAttribute
-     - parameter value:         CGFloat
-     - parameter priority:      UILayoutPriority
-     */
-    func addTopMarginConstraintFrom(
+     - parameter: from:             The "from" AnyObject.
+     - parameter: fromAttribute:    The "from" NSLayoutAttribute.
+     - parameter: relatedBy:        The NSLayoutRelation (default: .Equal)
+     - parameter: to:               The "to" AnyObject.
+     - parameter: toAttribute:      The "to" NSLayoutAttribute.
+     - parameter: multiplier:       The multiplier to change the value (default: 1.0)
+     - parameter: value:            The value set in the constraint (default: 0.0).
+     - parameter: priority:         The constraint priority (default: 1000).
+    */
+    private func addConstraintFrom(
         from: AnyObject,
-        fromAttribute: NSLayoutAttribute = .Top,
+        fromAttribute: NSLayoutAttribute,
+        relatedBy: NSLayoutRelation = .Equal,
         to: AnyObject,
-        toAttribute: NSLayoutAttribute = .Top,
-        value: CGFloat,
-        priority: UILayoutPriority = 1000)
-    {
-        let constraint = NSLayoutConstraint(
-            item: to,
-            attribute: toAttribute,
-            relatedBy: .Equal,
-            toItem: from,
-            attribute: fromAttribute,
-            multiplier: 1,
-            constant: value
-        )
-        
-        constraint.priority = priority
-        view.addConstraint(constraint)
-    }
-    
-    /**
-     Add bottom margin constraint (refers to self.view).
-     
-     - parameter from:          AnyObject
-     - parameter fromAttribute: NSLayoutAttribute
-     - parameter to:            AnyObject
-     - parameter toAttribute:   NSLayoutAttribute
-     - parameter value:         CGFloat
-     - parameter priority:      UILayoutPriority
-     */
-    func addBottomMarginConstraintFrom(
-        from: AnyObject,
-        fromAttribute: NSLayoutAttribute = .Bottom,
-        to: AnyObject,
-        toAttribute: NSLayoutAttribute = .Bottom,
-        value: CGFloat,
+        toAttribute: NSLayoutAttribute,
+        multiplier: CGFloat = 1.0,
+        value: CGFloat = 0.0,
         priority: UILayoutPriority = 1000)
     {
         let constraint = NSLayoutConstraint(
             item: from,
             attribute: fromAttribute,
-            relatedBy: .Equal,
+            relatedBy: relatedBy,
             toItem: to,
             attribute: toAttribute,
-            multiplier: 1,
+            multiplier: multiplier,
             constant: value
         )
         
         constraint.priority = priority
         view.addConstraint(constraint)
-    }
-    
-    /**
-     Add left margin constraint.
-     
-     - parameter from:          AnyObject
-     - parameter fromAttribute: NSLayoutAttribute
-     - parameter to:            AnyObject
-     - parameter toAttribute:   NSLayoutAttribute
-     - parameter value:         CGFloat
-     - parameter priority:      UILayoutPriority
-     */
-    private func addLeftMarginConstraintFrom(
-        from: AnyObject,
-        fromAttribute: NSLayoutAttribute = .Left,
-        to: AnyObject,
-        toAttribute: NSLayoutAttribute = .Left,
-        value: CGFloat,
-        priority: UILayoutPriority = 1000)
-    {
-        let constraint = NSLayoutConstraint(
-            item: to,
-            attribute: toAttribute,
-            relatedBy: .Equal,
-            toItem: from,
-            attribute: fromAttribute,
-            multiplier: 1,
-            constant: value
-        )
-        
-        constraint.priority = priority
-        view.addConstraint(constraint)
-    }
-    
-    /**
-     Add right margin constraint.
-     
-     - parameter from:          AnyObject
-     - parameter fromAttribute: NSLayoutAttribute
-     - parameter to:            AnyObject
-     - parameter toAttribute:   NSLayoutAttribute
-     - parameter value:         CGFloat
-     */
-    private func addRightMarginConstraintFrom(
-        from: AnyObject,
-        fromAttribute: NSLayoutAttribute = .Right,
-        to: AnyObject,
-        toAttribute: NSLayoutAttribute = .Right,
-        value: CGFloat)
-    {
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: from,
-                attribute: fromAttribute,
-                relatedBy: .Equal,
-                toItem: to,
-                attribute: toAttribute,
-                multiplier: 1,
-                constant: value
-            )
-        )
     }
     
     /**
@@ -468,26 +365,6 @@ public class BHToast: UIView {
                 views: [
                     "element": element
                 ]
-            )
-        )
-    }
-    
-    /**
-     Add ratio constraint
-     
-     - parameter element:       AnyObject
-     - parameter multiplier:    CGFloat
-    */
-    private func addRatioConstraintToElement(element: AnyObject, multiplier: CGFloat) {
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: element,
-                attribute: .Height,
-                relatedBy: .Equal,
-                toItem: element,
-                attribute: .Width,
-                multiplier: multiplier,
-                constant: 0
             )
         )
     }
