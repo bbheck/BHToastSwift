@@ -13,25 +13,26 @@ import BHToast
 class ViewController: UIViewController {
     
     @IBAction func showToastWithImage(sender: UIButton) {
+        let isSuccess = arc4random_uniform(10) % 2 == 0
+        
         BHToast(
             view: view,
             message: randomMessage,
             imageView: UIImageView(
                 image: UIImage(
-                    named: "SuccessIcon"
+                    named: isSuccess ? "SuccessIcon" : "ErrorIcon"
                 )
             ),
             options: BHToastOptions(
-                minHeight: 40.0
+                minHeight: 40.0,
+                imagePosition: isSuccess ? .Left : .Right
             )
         ).show()
     }
     
     @IBAction func showToastAction(sender: UIButton) {
-        BHToast(
-            view: view,
-            message: randomMessage
-        ).show()
+        toast.message = randomMessage
+        toast.show()
     }
     
     let messages: [String] = [
@@ -49,6 +50,10 @@ class ViewController: UIViewController {
         let index = Int(arc4random_uniform(UInt32(messages.count - 1)))
         return messages[index]
     }
+    
+    lazy var toast: BHToast = {
+        return BHToast(view: self.view)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
