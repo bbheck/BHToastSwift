@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.3.1 (2016-02-28)
+
+### Enhancements
+
+- Add support to add/change the message and the imageView.
+- Create a generic method to manage the `BHToast` constraints.
+- Improve some documentation.
+
+### Bug fixed
+
+- Fix when the same `BHToast` instance called more than once the `show` method.
+
+
 ## 0.3.0 (2016-01-17)
 
 ### Enhancements
