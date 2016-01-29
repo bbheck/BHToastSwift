@@ -75,7 +75,7 @@ public struct BHToastOptions {
      Create an instance of BHToastOptions with some customizations.
     
      If necessary, change the default values to apply the customization for all new BHToastOptions instance.
-    */
+     */
     public init(
         duration: NSTimeInterval = defaultDuration,
         animationDuration: NSTimeInterval = defaultAnimationDuration,
