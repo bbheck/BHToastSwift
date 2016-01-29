@@ -27,17 +27,27 @@ pod "BHToast"
 ### Showing a BHToast (only message)
 
 ```swift
-import BHToast
-
 BHToast(view: view, message: "This is an example message.").show()
+```
+or
+```swift
+let toast = BHToast(view: view)
+
+toast.message = "This is an example message."
+toast.show()
 ```
 
 ### Showing a BHToast (with image)
 
 ```swift
-import BHToast
-
 BHToast(view: view, message: "This is an example message.", imageView: `yourImageView`).show()
+```
+or
+```swift
+let toast = BHToast(view: view, message: "This is an example message.")
+
+toast.imageView = `yourImageView`
+toast.show()
 ```
 
 ### Showing a BHToast (with options)
