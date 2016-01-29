@@ -9,6 +9,7 @@
 import UIKit
 
 /// The BHToast class defines a custom UIView with a message.
+@available(iOS 8.0, *)
 public class BHToast: UIView {
     
     // MARK: - Properties
@@ -17,46 +18,48 @@ public class BHToast: UIView {
     private let view: UIView
     
     /// The display message.
-    private var message: String
+    public var message: String
     
     /// The display imageView (optional)
-    private var imageView: UIImageView?
+    public var imageView: UIImageView?
     
-    /// The view options
+    /// The view BHToastOptions
     private let options: BHToastOptions
     
-    /// The BHToast width.
+    /// The BHToast width (fixed 300.0).
     private let width: CGFloat = 300.0
     
+    /// The message UILabel
     private let messageLabel = UILabel()
+    
+    /// The timer to hide the BHToast.
+    private var timer = NSTimer()
     
     // MARK: - Init methods
     
     /**
      Custom init method.
-     
+
      Create an instance of BHToast to attach in an UIView.
      You should set a message and can add an image view to display.
-     
+
      - parameter view:              The UIView that shows the BHToast.
      - parameter message:           The display message.
      - parameter imageView:         The display image view.
      - parameter options:           The BHToastOptions instance.
      */
-    public init(view: UIView, message: String, imageView: UIImageView? = nil, options: BHToastOptions = BHToastOptions()) {
+    public init(
+        view: UIView,
+        message: String = "",
+        imageView: UIImageView? = nil,
+        options: BHToastOptions = BHToastOptions())
+    {
         self.view = view
         self.message = message
         self.imageView = imageView
         self.options = options
         
-        super.init(
-            frame: CGRect(
-                x: 0.0,
-                y: 0.0,
-                width: width,
-                height: options.minHeight
-            )
-        )
+        super.init(frame: CGRectZero)
         
         setupViewProperties()
     }
@@ -66,10 +69,12 @@ public class BHToast: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Override method
+    // MARK: - Setup methods
     
-    public override func drawRect(rect: CGRect) {
-        
+    /**
+     Configures view constraints and calls the other setup methods.
+    */
+    private func setupProperties() {
         addWidthConstraintToElement(
             self,
             rule: "\(width)"
@@ -105,14 +110,13 @@ public class BHToast: UIView {
         setupMessageLabel()
     }
     
-    // MARK: - Setup methods
-    
     /**
      Sets the view properties.
-     */
+    */
     private func setupViewProperties() {
         tag = BHToastViewTag
         
+        alpha = 0.0
         backgroundColor = options.backgroundColor
         
         translatesAutoresizingMaskIntoConstraints = false
@@ -120,7 +124,7 @@ public class BHToast: UIView {
     
     /**
      Sets the layer properties.
-     */
+    */
     private func setupLayerProperties() {
         layer.borderWidth = options.borderWidth
         layer.borderColor = options.borderColor.CGColor
@@ -131,7 +135,7 @@ public class BHToast: UIView {
     }
     
     /**
-     Sets the UIImageView properties
+     Sets the UIImageView properties.
     */
     private func setupImageView() {
         addSubview(imageView!)
@@ -175,7 +179,7 @@ public class BHToast: UIView {
             toAttribute: .Width,
             multiplier: imageView!.frame.height / imageView!.frame.width
         )
-    
+        
     }
     
     /**
@@ -246,58 +250,96 @@ public class BHToast: UIView {
         
     }
     
-    // MARK: - Event method
-    
-    private func dispatchHideEvent() {
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(options.duration * Double(NSEC_PER_SEC)))
-        dispatch_after(time, dispatch_get_main_queue(), { () -> Void in
-            self.hide()
-        })
-    }
-    
-    // MARK: - Public methods
+    // MARK: - Scheduled method
     
     /**
-     Hide action.
-    */
-    public func hide() {
-        UIView.animateWithDuration(
-            options.animationDuration,
-            animations: { () -> Void in
-                self.alpha = 0.0
-            }, completion: { (finish) -> Void in
-                self.removeFromSuperview()
-            }
+     Starts the timer that hide the BHToast.
+     */
+    private func scheduledHideEvent() {
+        timer = NSTimer.scheduledTimerWithTimeInterval(
+            options.duration,
+            target: self,
+            selector: "hide",
+            userInfo: nil,
+            repeats: false
         )
     }
     
+    // MARK: - Private show method
+    
     /**
-     The show method.
-    */
-    public func show() {
-        // Remove from screen if the BHToast already exists.
-        if let _view = view.viewWithTag(BHToastViewTag) as? BHToast {
-            _view.hide()
-        }
-        
-        alpha = 0.0
+     Shows the view with animation.
+     */
+    private func showWithAnimation() {
         view.addSubview(self)
+        
+        setupProperties()
         
         UIView.animateWithDuration(
             options.animationDuration,
             animations: { () -> Void in
                 self.alpha = 1.0
             }, completion: { (finish) -> Void in
-                self.dispatchHideEvent()
+                self.scheduledHideEvent()
             }
         )
+    }
+    
+    // MARK: - Private hide method
+    
+    /**
+     Hides the view with animation.
+
+     - parameter showAgain: The flag that checks if is necessary to show again the view.
+     */
+    private func hideWithAnimation(completionHandler completionHandler: () -> Void = {}) {
+        UIView.animateWithDuration(
+            options.animationDuration,
+            animations: { () -> Void in
+                self.alpha = 0.0
+            }, completion: { (finish) -> Void in
+                self.removeFromSuperview()
+                self.timer.invalidate()
+                completionHandler()
+            }
+        )
+    }
+    
+    // MARK: - Public methods
+    
+    /**
+     Hides the BHToast with fade animation.
+     */
+    public func hide() {
+        hideWithAnimation()
+    }
+    
+    /**
+     Shows the BHToast with animation.
+     
+     * If BHToast has already been added to parent view, dismiss the BHToast to show again.
+     * If some BHToast with BHToastViewTag already exists in parent view, dismiss it to show the new BHToast.
+     * Otherwise, just show the BHToast with fade animation.
+     */
+    public func show() {
+        if isDescendantOfView(view) {
+            hideWithAnimation(completionHandler: { () -> Void in
+                self.showWithAnimation()
+            })
+        } else if let _view = view.viewWithTag(BHToastViewTag) as? BHToast {
+            _view.hideWithAnimation(completionHandler: { () -> Void in
+                self.showWithAnimation()
+            })
+        } else {
+            showWithAnimation()
+        }
     }
     
     // MARK: - Constraint methods
     
     /**
-     Generic method to add constraint to item.
-    
+     Generic method to add a constraint.
+
      - parameter: from:             The "from" AnyObject.
      - parameter: fromAttribute:    The "from" NSLayoutAttribute.
      - parameter: relatedBy:        The NSLayoutRelation (default: .Equal)
@@ -306,7 +348,7 @@ public class BHToast: UIView {
      - parameter: multiplier:       The multiplier to change the value (default: 1.0)
      - parameter: value:            The value set in the constraint (default: 0.0).
      - parameter: priority:         The constraint priority (default: 1000).
-    */
+     */
     private func addConstraintFrom(
         from: AnyObject,
         fromAttribute: NSLayoutAttribute,
@@ -333,7 +375,7 @@ public class BHToast: UIView {
     
     /**
      Add height constraint.
-     
+
      - parameter element:   AnyObject
      - parameter rule:      String (examples: "<=200", ">300", "200")
      */
@@ -352,7 +394,7 @@ public class BHToast: UIView {
     
     /**
      Add width constraint
-     
+
      - parameter element:   AnyObject
      - parameter rule:      String (examples: "<=200", ">300", "200")
      */
