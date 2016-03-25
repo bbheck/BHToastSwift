@@ -1,25 +1,19 @@
 {
   "name": "BHToast",
-  "version": "0.1.0",
-  "summary": "A short description of BHToast.",
-  "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/BHToast",
+  "version": "0.3.0",
+  "summary": "BHToast is a custom UIView written in Swift inspired by Android Toast.",
+  "homepage": "https://github.com/bbheck/BHToastSwift",
   "license": "MIT",
   "authors": {
     "Bruno Hecktheuer": "bbheck@gmail.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/BHToast.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/bbheck/BHToastSwift.git",
+    "tag": "0.3.0"
   },
   "platforms": {
     "ios": "8.0"
   },
   "requires_arc": true,
-  "source_files": "Pod/Classes/**/*",
-  "resource_bundles": {
-    "BHToast": [
-      "Pod/Assets/*.png"
-    ]
-  }
+  "source_files": "Pod/Classes/**/*"
 }
