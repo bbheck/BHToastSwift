@@ -38,13 +38,35 @@ class BHToast_ExampleTests: XCTestCase {
         super.tearDown()
     }
     
+    func testView_show() {
+        toast = BHToast(view: view, message: message)
+        toast.show()
+        
+        sleep()
+        
+        XCTAssertTrue(view.subviews.contains(toast))
+    }
+    
+    func testView_hide() {
+        toast = BHToast(view: view, message: message)
+        toast.show()
+        
+        sleep()
+        
+        XCTAssertTrue(view.subviews.contains(toast))
+    }
+    
     func testView_width() {
         toast = BHToast(view: view, message: message)
         toast.show()
         
         sleep()
         
-        XCTAssertEqual(toast.frame.width, width)
+        toast.hide()
+        
+        sleep()
+        
+        XCTAssertFalse(view.subviews.contains(toast))
     }
     
     func testView_height() {
