@@ -30,7 +30,7 @@ public class BHToast: UIView {
     private let width: CGFloat = 300.0
     
     /// The message UILabel
-    private let messageLabel = UILabel()
+    internal let messageLabel = UILabel()
     
     /// The timer to hide the BHToast.
     private var timer = NSTimer()
@@ -47,7 +47,7 @@ public class BHToast: UIView {
      - parameter message:           The display message.
      - parameter imageView:         The display image view.
      - parameter options:           The BHToastOptions instance.
-     */
+    */
     public init(
         view: UIView,
         message: String = "",
