@@ -24,7 +24,7 @@ pod "BHToast"
 
 <img src="https://cloud.githubusercontent.com/assets/2257294/12374113/f796500a-bc78-11e5-93bc-ac886c3d1f66.gif">
 
-### Showing a BHToast (only message)
+### Showing a `BHToast` (only message)
 
 ```swift
 BHToast(view: view, message: "This is an example message.").show()
@@ -37,7 +37,7 @@ toast.message = "This is an example message."
 toast.show()
 ```
 
-### Showing a BHToast (with image)
+### Showing a `BHToast` (with image)
 
 ```swift
 BHToast(view: view, message: "This is an example message.", imageView: `yourImageView`).show()
@@ -67,9 +67,9 @@ BHToast(view: view, message: "This is an example message.", options: options).sh
 ### Customizing
 
 `BHToastViewTag` is used to guarantee only one instance in view.
-If necessary, change it before first BHToast instance.
+If necessary, change it before first `BHToast` instance.
 
-You can create a `BHToastOptions` instance with this properties:
+You can create a `BHToastOptions` instance with these properties:
 
 * The time that `BHToast` stays in `UIView`. *Default: 5.0*
 ```swift
@@ -141,7 +141,7 @@ messageFont: UIFont
 imagePosition: BHToastImagePosition
 ```
 
-**All this properties have a default value. Change it to apply the customizations to all new `BHToast` instances.**
+**All those properties have a default value. Change them to apply the customizations to all new `BHToast` instances.**
 
 ## Author
 
