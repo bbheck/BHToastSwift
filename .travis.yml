@@ -2,6 +2,7 @@
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
 
+install: travis_wait 30 mvn install
 language: objective-c
 osx_image: xcode7.3
 xcode_workspace: Example/BHToast.xcworkspace
