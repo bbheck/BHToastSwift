@@ -20,19 +20,19 @@ public class BHToast: UIView {
     /// The display message.
     public var message: String
     
-    /// The display imageView (optional)
+    /// The display imageView
     public var imageView: UIImageView?
     
-    /// The view BHToastOptions
+    /// The BHToastOptions
     private let options: BHToastOptions
     
     /// The BHToast width (fixed 300.0).
     private let width: CGFloat = 300.0
     
-    /// The message UILabel
+    /// The UILabel message
     internal let messageLabel = UILabel()
     
-    /// The timer to hide the BHToast.
+    /// The timer that hide the BHToast.
     private var timer = NSTimer()
     
     // MARK: - Init methods
@@ -49,12 +49,12 @@ public class BHToast: UIView {
      - parameter options:           The BHToastOptions instance.
     */
     public init(
-        view: UIView,
+        view: UIView? = nil,
         message: String = "",
         imageView: UIImageView? = nil,
         options: BHToastOptions = BHToastOptions())
     {
-        self.view = view
+        self.view = view ?? BHToastUtils.topViewController.view
         self.message = message
         self.imageView = imageView
         self.options = options
@@ -97,17 +97,33 @@ public class BHToast: UIView {
             toAttribute: .CenterX
         )
         
-        addConstraintFrom( // Bottom Margin
-            view,
-            fromAttribute: .Bottom,
-            to: self,
-            toAttribute: .Bottom,
-            value: options.bottomOffset
-        )
+        setupViewPosition()
         
         setupLayerProperties()
         if imageView != nil { setupImageView() }
         setupMessageLabel()
+    }
+    
+    private func setupViewPosition() {
+        switch options.position {
+        case .Bottom:
+            addConstraintFrom( // Bottom Margin
+                view, fromAttribute: .Bottom,
+                to: self, toAttribute: .Bottom,
+                value: options.margin
+            )
+        case .Middle:
+            addConstraintFrom( // Align Center Y
+                view, fromAttribute: .CenterY,
+                to: self, toAttribute: .CenterY
+            )
+        case .Top:
+            addConstraintFrom( // Top Margin
+                self, fromAttribute: .Top,
+                to: view, toAttribute: .Top,
+                value: options.margin
+            )
+        }
     }
     
     /**
