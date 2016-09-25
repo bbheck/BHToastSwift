@@ -12,28 +12,9 @@ import BHToast
 
 class ViewController: UIViewController {
     
-    @IBAction func showToastWithImage(sender: UIButton) {
-        let isSuccess = arc4random_uniform(10) % 2 == 0
-        
-        BHToast(
-            view: view,
-            message: randomMessage,
-            imageView: UIImageView(
-                image: UIImage(
-                    named: isSuccess ? "SuccessIcon" : "ErrorIcon"
-                )
-            ),
-            options: BHToastOptions(
-                minHeight: 40.0,
-                imagePosition: isSuccess ? .Left : .Right
-            )
-        ).show()
-    }
-    
-    @IBAction func showToastAction(sender: UIButton) {
-        toast.message = randomMessage
-        toast.show()
-    }
+    lazy var toast: BHToast = {
+        return BHToast()
+    }()
     
     let messages: [String] = [
         "Lorem ipsum dolor sit amet, vim liber iudicabit assentior ut, mel ad aliquid omittantur.",
@@ -50,24 +31,37 @@ class ViewController: UIViewController {
         let index = Int(arc4random_uniform(UInt32(messages.count - 1)))
         return messages[index]
     }
+
+}
+
+// MARK: - Actions
+
+extension ViewController {
     
-    lazy var toast: BHToast = {
-        return BHToast(view: self.view)
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func showToastWithImage(sender: UIButton) {
+        let isSuccess = arc4random_uniform(10) % 2 == 0
+        
+        BHToast(
+            view: view,
+            message: randomMessage,
+            imageView: UIImageView(
+                image: UIImage(
+                    named: isSuccess ? "SuccessIcon" : "ErrorIcon"
+                )
+            ),
+            options: BHToastOptions(
+                minHeight: 40.0,
+                margin: 44.0,
+                imagePosition: isSuccess ? .Left : .Right,
+                position: .Top
+            )
+            ).show()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
+    @IBAction func showToastAction(sender: UIButton) {
+        toast.message = randomMessage
+        toast.show()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
 }
 
