@@ -12,11 +12,9 @@ import BHToast
 
 class ViewController: UIViewController {
     
-    lazy var toast: BHToast = {
-        return BHToast()
-    }()
+    lazy var toast = BHToast()
     
-    let messages: [String] = [
+    let messages = [
         "Lorem ipsum dolor sit amet, vim liber iudicabit assentior ut, mel ad aliquid omittantur.",
         "No referrentur adversarium nec.",
         "Usu ne stet autem scripta, has partem forensibus eu.",
