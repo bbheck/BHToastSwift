@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BCAB71F1CA49DBA008DF9FF /* BHToast_ExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCAB71E1CA49DBA008DF9FF /* BHToast_ExampleTests.swift */; };
+		0BF305CC1D973E660018811C /* BHToast_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF305CB1D973E660018811C /* BHToast_Tests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0BCAB7211CA49DBA008DF9FF /* PBXContainerItemProxy */ = {
+		0BF305CE1D973E660018811C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
 			proxyType = 1;
@@ -27,9 +27,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0BCAB71C1CA49DBA008DF9FF /* BHToast_ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BHToast_ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0BCAB71E1CA49DBA008DF9FF /* BHToast_ExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHToast_ExampleTests.swift; sourceTree = "<group>"; };
-		0BCAB7201CA49DBA008DF9FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BF305C91D973E660018811C /* BHToast_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BHToast_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BF305CB1D973E660018811C /* BHToast_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHToast_Tests.swift; sourceTree = "<group>"; };
+		0BF305CD1D973E660018811C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3668B49000F7A6119189A223 /* Pods-BHToast_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BHToast_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BHToast_Example/Pods-BHToast_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* BHToast_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BHToast_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,7 +47,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0BCAB7191CA49DBA008DF9FF /* Frameworks */ = {
+		0BF305C61D973E660018811C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -65,13 +65,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0BCAB71D1CA49DBA008DF9FF /* BHToast_ExampleTests */ = {
+		0BF305CA1D973E660018811C /* BHToast_Tests */ = {
 			isa = PBXGroup;
 			children = (
-				0BCAB71E1CA49DBA008DF9FF /* BHToast_ExampleTests.swift */,
-				0BCAB7201CA49DBA008DF9FF /* Info.plist */,
+				0BF305CB1D973E660018811C /* BHToast_Tests.swift */,
+				0BF305CD1D973E660018811C /* Info.plist */,
 			);
-			path = BHToast_ExampleTests;
+			path = BHToast_Tests;
 			sourceTree = "<group>";
 		};
 		1409210C59CC2B4E2D1E1D66 /* Pods */ = {
@@ -97,7 +97,7 @@
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for BHToast */,
-				0BCAB71D1CA49DBA008DF9FF /* BHToast_ExampleTests */,
+				0BF305CA1D973E660018811C /* BHToast_Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				1409210C59CC2B4E2D1E1D66 /* Pods */,
 				5E78B1989C9D300D162B0004 /* Frameworks */,
@@ -108,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* BHToast_Example.app */,
-				0BCAB71C1CA49DBA008DF9FF /* BHToast_ExampleTests.xctest */,
+				0BF305C91D973E660018811C /* BHToast_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,22 +148,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0BCAB71B1CA49DBA008DF9FF /* BHToast_ExampleTests */ = {
+		0BF305C81D973E660018811C /* BHToast_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0BCAB7231CA49DBA008DF9FF /* Build configuration list for PBXNativeTarget "BHToast_ExampleTests" */;
+			buildConfigurationList = 0BF305D01D973E660018811C /* Build configuration list for PBXNativeTarget "BHToast_Tests" */;
 			buildPhases = (
-				0BCAB7181CA49DBA008DF9FF /* Sources */,
-				0BCAB7191CA49DBA008DF9FF /* Frameworks */,
-				0BCAB71A1CA49DBA008DF9FF /* Resources */,
+				0BF305C51D973E660018811C /* Sources */,
+				0BF305C61D973E660018811C /* Frameworks */,
+				0BF305C71D973E660018811C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0BCAB7221CA49DBA008DF9FF /* PBXTargetDependency */,
+				0BF305CF1D973E660018811C /* PBXTargetDependency */,
 			);
-			name = BHToast_ExampleTests;
-			productName = BHToast_ExampleTests;
-			productReference = 0BCAB71C1CA49DBA008DF9FF /* BHToast_ExampleTests.xctest */;
+			name = BHToast_Tests;
+			productName = BHToast_Tests;
+			productReference = 0BF305C91D973E660018811C /* BHToast_Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		607FACCF1AFB9204008FA782 /* BHToast_Example */ = {
@@ -192,12 +192,12 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
-					0BCAB71B1CA49DBA008DF9FF = {
-						CreatedOnToolsVersion = 7.2.1;
+					0BF305C81D973E660018811C = {
+						CreatedOnToolsVersion = 7.3.1;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 					607FACCF1AFB9204008FA782 = {
@@ -219,13 +219,13 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* BHToast_Example */,
-				0BCAB71B1CA49DBA008DF9FF /* BHToast_ExampleTests */,
+				0BF305C81D973E660018811C /* BHToast_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0BCAB71A1CA49DBA008DF9FF /* Resources */ = {
+		0BF305C71D973E660018811C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -293,11 +293,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0BCAB7181CA49DBA008DF9FF /* Sources */ = {
+		0BF305C51D973E660018811C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BCAB71F1CA49DBA008DF9FF /* BHToast_ExampleTests.swift in Sources */,
+				0BF305CC1D973E660018811C /* BHToast_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,10 +313,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0BCAB7221CA49DBA008DF9FF /* PBXTargetDependency */ = {
+		0BF305CF1D973E660018811C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* BHToast_Example */;
-			targetProxy = 0BCAB7211CA49DBA008DF9FF /* PBXContainerItemProxy */;
+			targetProxy = 0BF305CE1D973E660018811C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -340,30 +340,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0BCAB7241CA49DBA008DF9FF /* Debug */ = {
+		0BF305D11D973E660018811C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = BHToast_ExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				INFOPLIST_FILE = BHToast_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.brunohecktheuer.BHToast-ExampleTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.brunohecktheuer.BHToast-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BHToast_Example.app/BHToast_Example";
 			};
 			name = Debug;
 		};
-		0BCAB7251CA49DBA008DF9FF /* Release */ = {
+		0BF305D21D973E660018811C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				ENABLE_TESTABILITY = NO;
-				INFOPLIST_FILE = BHToast_ExampleTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				CLANG_ANALYZER_NONNULL = YES;
+				INFOPLIST_FILE = BHToast_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "br.com.brunohecktheuer.BHToast-ExampleTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "br.com.brunohecktheuer.BHToast-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BHToast_Example.app/BHToast_Example";
 			};
@@ -480,14 +480,13 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0BCAB7231CA49DBA008DF9FF /* Build configuration list for PBXNativeTarget "BHToast_ExampleTests" */ = {
+		0BF305D01D973E660018811C /* Build configuration list for PBXNativeTarget "BHToast_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0BCAB7241CA49DBA008DF9FF /* Debug */,
-				0BCAB7251CA49DBA008DF9FF /* Release */,
+				0BF305D11D973E660018811C /* Debug */,
+				0BF305D21D973E660018811C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "BHToast" */ = {
 			isa = XCConfigurationList;

@@ -1,8 +1,8 @@
 //
-//  BHToast_ExampleTests.swift
-//  BHToast_ExampleTests
+//  BHToast_Tests.swift
+//  BHToast_Tests
 //
-//  Created by Bruno Hecktheuer on 3/24/16.
+//  Created by Bruno Hecktheuer on 9/23/16.
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
 
@@ -10,11 +10,11 @@ import XCTest
 
 @testable import BHToast
 
-class BHToast_ExampleTests: XCTestCase {
+class BHToast_Tests: XCTestCase {
     private var toast: BHToast!
     
     private let message = "This is an example message"
-    private let bottomOffset: CGFloat = 40.0
+    private let margin: CGFloat = 40.0
     private let width: CGFloat = 300.0
     private let minHeight: CGFloat = 40.0
     private let maxHeight: CGFloat = 60.0
@@ -86,23 +86,60 @@ class BHToast_ExampleTests: XCTestCase {
         XCTAssertLessThanOrEqual(toast.frame.height, maxHeight)
     }
     
-    func testView_bottomOffset() {
+    func testView_topPosition() {
         toast = BHToast(
             view: view,
             message: message,
             options: BHToastOptions(
-                bottomOffset: bottomOffset
+                margin: margin,
+                position: .Top
             )
         )
         toast.show()
-
+        
         sleep()
         
-        XCTAssertGreaterThanOrEqual(
-            view.frame.height -
-            (toast.frame.origin.y +
-            toast.frame.height),
-            bottomOffset
+        XCTAssertEqual(
+            toast.frame.origin.y,
+            margin
+        )
+    }
+    
+    func testView_middlePosition() {
+        toast = BHToast(
+            view: view,
+            message: message,
+            options: BHToastOptions(
+                margin: margin,
+                position: .Middle
+            )
+        )
+        toast.show()
+        
+        sleep()
+        
+        XCTAssertEqual(
+            toast.center,
+            view.center
+        )
+    }
+    
+    func testView_bottomPosition() {
+        toast = BHToast(
+            view: view,
+            message: message,
+            options: BHToastOptions(
+                margin: margin,
+                position: .Bottom
+            )
+        )
+        toast.show()
+        
+        sleep()
+        
+        XCTAssertEqual(
+            view.frame.height - (toast.frame.origin.y + toast.frame.height),
+            margin
         )
     }
     
@@ -134,8 +171,8 @@ class BHToast_ExampleTests: XCTestCase {
         
         XCTAssertEqual(
             toast.frame.height -
-            (toast.messageLabel.frame.origin.y +
-            toast.messageLabel.frame.height),
+                (toast.messageLabel.frame.origin.y +
+                    toast.messageLabel.frame.height),
             contentInsets.bottom
         )
         
@@ -146,8 +183,8 @@ class BHToast_ExampleTests: XCTestCase {
         
         XCTAssertEqual(
             toast.frame.width -
-            (toast.messageLabel.frame.origin.x +
-            toast.messageLabel.frame.width),
+                (toast.messageLabel.frame.origin.x +
+                    toast.messageLabel.frame.width),
             contentInsets.right
         )
     }

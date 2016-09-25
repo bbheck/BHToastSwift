@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		077C7877181A4BB02F79BE869C797998 /* BHToastOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22F425AE10CB89079C36FEB13CD3E5 /* BHToastOptions.swift */; };
+		0BC66F021D9736E20059E0DE /* BHToastUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC66F011D9736E20059E0DE /* BHToastUtils.swift */; };
 		2A8AF68E59E524F8CE16515E32615844 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		64946AFEB513F2F4BF64A4798159D73E /* Pods-BHToast_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C2E92FA299597C6DFE415DF591E9BF /* Pods-BHToast_Example-dummy.m */; };
 		988CEE0FE1277829B7FF053DF8C47A94 /* BHToast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 917C991BF41D8C06C86B775D4268F6F6 /* BHToast-dummy.m */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0BC66F011D9736E20059E0DE /* BHToastUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BHToastUtils.swift; sourceTree = "<group>"; };
 		162FA498CE6DA34C63D0D0F13721C474 /* BHToast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BHToast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD04A172CE14DC6CCE38E18393A5085 /* Pods_BHToast_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BHToast_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FB07D710A44C2C9693CA633E7569AA /* Pods-BHToast_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BHToast_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			children = (
 				C9FAC6FE21123E9665F631569967E23D /* BHToast.swift */,
 				5C22F425AE10CB89079C36FEB13CD3E5 /* BHToastOptions.swift */,
+				0BC66F011D9736E20059E0DE /* BHToastUtils.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				988CEE0FE1277829B7FF053DF8C47A94 /* BHToast-dummy.m in Sources */,
 				C6A9FF33DB2DCB9CEDF8AFDF1293F2C0 /* BHToast.swift in Sources */,
 				077C7877181A4BB02F79BE869C797998 /* BHToastOptions.swift in Sources */,
+				0BC66F021D9736E20059E0DE /* BHToastUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
