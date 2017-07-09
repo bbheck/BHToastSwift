@@ -15,47 +15,46 @@ import UIKit
 */
 public var BHToastViewTag = 3091990
 
-
 /// Represents the view position (Bottom, Middle, Top)
 public enum BHToastPosition {
-    case Bottom, Middle, Top
+    case bottom, middle, top
 }
 
 /// Represents the image position (Left or Right)
 public enum BHToastImagePosition {
-    case Left, Right
+    case left, right
 }
 
 /// The struct of customization options.
 public struct BHToastOptions {
     
     // Default properties (change if necessary)
-    public static var defaultDuration: NSTimeInterval = 5.0
-    public static var defaultAnimationDuration: NSTimeInterval = 0.4
-    public static var defaultBackgroundColor = UIColor.lightGrayColor()
-    public static var defaultBorderColor = UIColor.darkGrayColor()
+    public static var defaultDuration: TimeInterval = 5.0
+    public static var defaultAnimationDuration: TimeInterval = 0.4
+    public static var defaultBackgroundColor: UIColor = .lightGray
+    public static var defaultBorderColor: UIColor = .darkGray
     public static var defaultBorderWidth: CGFloat = 1.0
     public static var defaultCornerRadius: CGFloat = 5.0
-    ///  Only applies when the position is Top or Bottom.
+    /// Only applies when the position is top or bottom.
     public static var defaultMargin: CGFloat = 8.0
     public static var defaultContentInsets = UIEdgeInsets(
         top: 8.0, left: 8.0, bottom: 8.0, right: 8.0
     )
     public static var defaultMinHeight: CGFloat = 30.0
     public static var defaultMaxHeight: CGFloat = 50.0
-    public static var defaultMessageAlignment: NSTextAlignment = .Center
-    public static var defaultMessageColor = UIColor.whiteColor()
-    public static var defaultMessageFont = UIFont.systemFontOfSize(14.0)
-    public static var defaultPosition: BHToastPosition = .Bottom
-    public static var defaultImagePosition: BHToastImagePosition = .Left
+    public static var defaultMessageAlignment: NSTextAlignment = .center
+    public static var defaultMessageColor: UIColor = .white
+    public static var defaultMessageFont = UIFont.systemFont(ofSize: 14.0)
+    public static var defaultPosition: BHToastPosition = .bottom
+    public static var defaultImagePosition: BHToastImagePosition = .left
     
     // MARK: - Properties
     
     /// The duration that the Toast stays in View (*in seconds*).
-    public let duration: NSTimeInterval
+    public let duration: TimeInterval
     
     /// The animation time (*in seconds*).
-    public let animationDuration: NSTimeInterval
+    public let animationDuration: TimeInterval
     
     /// Toast background color.
     public let backgroundColor: UIColor
@@ -89,8 +88,8 @@ public struct BHToastOptions {
     
      If necessary, change the default values to apply the customization for all new BHToastOptions instance.
      */
-    public init(duration: NSTimeInterval = defaultDuration,
-                animationDuration: NSTimeInterval = defaultAnimationDuration,
+    public init(duration: TimeInterval = defaultDuration,
+                animationDuration: TimeInterval = defaultAnimationDuration,
                 backgroundColor: UIColor = defaultBackgroundColor,
                 borderColor: UIColor = defaultBorderColor,
                 borderWidth: CGFloat = defaultBorderWidth,

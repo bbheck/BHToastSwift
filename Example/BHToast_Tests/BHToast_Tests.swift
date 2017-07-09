@@ -11,20 +11,20 @@ import XCTest
 @testable import BHToast
 
 class BHToast_Tests: XCTestCase {
-    private var toast: BHToast!
+    fileprivate var toast: BHToast!
     
-    private let message = "This is an example message"
-    private let margin: CGFloat = 40.0
-    private let width: CGFloat = 300.0
-    private let minHeight: CGFloat = 40.0
-    private let maxHeight: CGFloat = 60.0
-    private let contentInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+    fileprivate let message = "This is an example message"
+    fileprivate let margin: CGFloat = 40.0
+    fileprivate let width: CGFloat = 300.0
+    fileprivate let minHeight: CGFloat = 40.0
+    fileprivate let maxHeight: CGFloat = 60.0
+    fileprivate let contentInsets = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     
-    private var window: UIWindow {
-        return UIApplication.sharedApplication().windows.first!
+    fileprivate var window: UIWindow {
+        return UIApplication.shared.windows.first!
     }
     
-    private var view: UIView {
+    fileprivate var view: UIView {
         return window.rootViewController!.view
     }
     
@@ -92,7 +92,7 @@ class BHToast_Tests: XCTestCase {
             message: message,
             options: BHToastOptions(
                 margin: margin,
-                position: .Top
+                position: .top
             )
         )
         toast.show()
@@ -111,7 +111,7 @@ class BHToast_Tests: XCTestCase {
             message: message,
             options: BHToastOptions(
                 margin: margin,
-                position: .Middle
+                position: .middle
             )
         )
         toast.show()
@@ -130,7 +130,7 @@ class BHToast_Tests: XCTestCase {
             message: message,
             options: BHToastOptions(
                 margin: margin,
-                position: .Bottom
+                position: .bottom
             )
         )
         toast.show()
@@ -201,7 +201,7 @@ class BHToast_Tests: XCTestCase {
             options: BHToastOptions(
                 minHeight: minHeight,
                 maxHeight: maxHeight,
-                imagePosition: .Left
+                imagePosition: .left
             )
         )
         toast.show()
@@ -214,9 +214,9 @@ class BHToast_Tests: XCTestCase {
         )
     }
     
-    private func sleep(duration duration: NSTimeInterval = 0.2) {
-        NSRunLoop.currentRunLoop().runUntilDate(
-            NSDate().dateByAddingTimeInterval(duration)
+    fileprivate func sleep(duration: TimeInterval = 0.2) {
+        RunLoop.current.run(
+            until: Date().addingTimeInterval(duration)
         )
     }
     

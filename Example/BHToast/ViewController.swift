@@ -12,7 +12,7 @@ import BHToast
 
 class ViewController: UIViewController {
     
-    lazy var toast = BHToast()
+    lazy var toast: BHToast = BHToast()
     
     let messages = [
         "Lorem ipsum dolor sit amet, vim liber iudicabit assentior ut, mel ad aliquid omittantur.",
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 
 extension ViewController {
     
-    @IBAction func showToastWithImage(sender: UIButton) {
+    @IBAction func showToastWithImage(_ sender: UIButton) {
         let isSuccess = arc4random_uniform(10) % 2 == 0
         
         BHToast(
@@ -48,15 +48,15 @@ extension ViewController {
                 )
             ),
             options: BHToastOptions(
-                minHeight: 40.0,
                 margin: 44.0,
-                imagePosition: isSuccess ? .Left : .Right,
-                position: .Top
+                minHeight: 40.0,
+                position: .top,
+                imagePosition: isSuccess ? .left : .right
             )
-            ).show()
+        ).show()
     }
     
-    @IBAction func showToastAction(sender: UIButton) {
+    @IBAction func showToastAction(_ sender: UIButton) {
         toast.message = randomMessage
         toast.show()
     }

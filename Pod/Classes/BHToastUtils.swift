@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class BHToastUtils {
+open class BHToastUtils {
     
-    public static var topViewController: UIViewController {
-        var topController = UIApplication.sharedApplication().keyWindow!.rootViewController!
+    open static var topViewController: UIViewController {
+        var topController = UIApplication.shared.keyWindow!.rootViewController!
         while topController.presentedViewController != nil {
             topController = topController.presentedViewController!
         }

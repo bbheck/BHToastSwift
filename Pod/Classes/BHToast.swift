@@ -10,7 +10,7 @@ import UIKit
 
 /// The BHToast class defines a custom UIView with a message.
 @available(iOS 8.0, *)
-public class BHToast: UIView {
+open class BHToast: UIView {
     
     // MARK: - Properties
     
@@ -18,10 +18,10 @@ public class BHToast: UIView {
     private let view: UIView
     
     /// The display message.
-    public var message: String
+    open var message: String
     
     /// The display imageView
-    public var imageView: UIImageView?
+    open var imageView: UIImageView?
     
     /// The BHToastOptions
     private let options: BHToastOptions
@@ -33,7 +33,7 @@ public class BHToast: UIView {
     internal let messageLabel = UILabel()
     
     /// The timer that hide the BHToast.
-    private var timer = NSTimer()
+    private var timer = Timer()
     
     // MARK: - Init methods
     
@@ -58,12 +58,12 @@ public class BHToast: UIView {
         self.imageView = imageView
         self.options = options
         
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         setupViewProperties()
     }
 
-    @available(*, unavailable, message="required init is unavailable")
+    @available(*, unavailable, message: "required init is unavailable")
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -79,8 +79,8 @@ public class BHToast: UIView {
         addHeightConstraintToElement(self, rule: "<=\(options.maxHeight)")
         
         addConstraintFrom( // Align Center X
-            view, fromAttribute: .CenterX,
-            to: self, toAttribute: .CenterX
+            view, fromAttribute: .centerX,
+            to: self, toAttribute: .centerX
         )
         
         setupViewPosition()
@@ -96,21 +96,21 @@ public class BHToast: UIView {
     
     private func setupViewPosition() {
         switch options.position {
-        case .Bottom:
+        case .bottom:
             addConstraintFrom( // Bottom Margin
-                view, fromAttribute: .Bottom,
-                to: self, toAttribute: .Bottom,
+                view, fromAttribute: .bottom,
+                to: self, toAttribute: .bottom,
                 value: options.margin
             )
-        case .Middle:
+        case .middle:
             addConstraintFrom( // Align Center Y
-                view, fromAttribute: .CenterY,
-                to: self, toAttribute: .CenterY
+                view, fromAttribute: .centerY,
+                to: self, toAttribute: .centerY
             )
-        case .Top:
+        case .top:
             addConstraintFrom( // Top Margin
-                self, fromAttribute: .Top,
-                to: view, toAttribute: .Top,
+                self, fromAttribute: .top,
+                to: view, toAttribute: .top,
                 value: options.margin
             )
         }
@@ -133,7 +133,7 @@ public class BHToast: UIView {
     */
     private func setupLayerProperties() {
         layer.borderWidth = options.borderWidth
-        layer.borderColor = options.borderColor.CGColor
+        layer.borderColor = options.borderColor.cgColor
         
         layer.cornerRadius = options.cornerRadius
         
@@ -149,20 +149,20 @@ public class BHToast: UIView {
         imageView!.translatesAutoresizingMaskIntoConstraints = false
         
         addConstraintFrom( // Align Center Y
-            self, fromAttribute: .CenterY,
-            to: imageView!, toAttribute: .CenterY
+            self, fromAttribute: .centerY,
+            to: imageView!, toAttribute: .centerY
         )
         
-        if options.imagePosition == .Left {
+        if options.imagePosition == .left {
             addConstraintFrom( // Left Margin
-                imageView!, fromAttribute: .Left,
-                to: self, toAttribute: .Left,
+                imageView!, fromAttribute: .left,
+                to: self, toAttribute: .left,
                 value: options.contentInsets.left
             )
         } else {
             addConstraintFrom( // Right Margin
-                self, fromAttribute: .Right,
-                to: imageView!, toAttribute: .Right,
+                self, fromAttribute: .right,
+                to: imageView!, toAttribute: .right,
                 value: options.contentInsets.right
             )
         }
@@ -173,8 +173,8 @@ public class BHToast: UIView {
         )
         
         addConstraintFrom( // Ratio Constraint
-            imageView!, fromAttribute: .Height,
-            to: imageView!, toAttribute: .Width,
+            imageView!, fromAttribute: .height,
+            to: imageView!, toAttribute: .width,
             multiplier: imageView!.frame.height / imageView!.frame.width
         )
     }
@@ -196,43 +196,43 @@ public class BHToast: UIView {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addConstraintFrom( // Top Margin
-            messageLabel, fromAttribute: .Top,
-            to: self, toAttribute: .Top,
+            messageLabel, fromAttribute: .top,
+            to: self, toAttribute: .top,
             value: options.contentInsets.top
         )
         
         addConstraintFrom( // Bottom Margin
-            self, fromAttribute: .Bottom,
-            to: messageLabel, toAttribute: .Bottom,
+            self, fromAttribute: .bottom,
+            to: messageLabel, toAttribute: .bottom,
             value: options.contentInsets.bottom
         )
         
         if imageView == nil {
             addConstraintFrom( // Left Margin
-                messageLabel, fromAttribute: .Left,
-                to: self, toAttribute: .Left,
+                messageLabel, fromAttribute: .left,
+                to: self, toAttribute: .left,
                 value: options.contentInsets.left
             )
             
             addConstraintFrom( // Right Margin
-                self, fromAttribute: .Right,
-                to: messageLabel, toAttribute: .Right,
+                self, fromAttribute: .right,
+                to: messageLabel, toAttribute: .right,
                 value: options.contentInsets.right
             )
         } else {
             addConstraintFrom( // Left Margin
                 messageLabel,
-                fromAttribute: .Left,
-                to: options.imagePosition == .Left ? imageView! : self,
-                toAttribute: options.imagePosition == .Left ? .Right : .Left,
+                fromAttribute: .left,
+                to: options.imagePosition == .left ? imageView! : self,
+                toAttribute: options.imagePosition == .left ? .right : .left,
                 value: options.contentInsets.left
             )
             
             addConstraintFrom( // Right Margin
-                options.imagePosition == .Right ? imageView! : self,
-                fromAttribute: options.imagePosition == .Right ? .Left : .Right,
+                options.imagePosition == .right ? imageView! : self,
+                fromAttribute: options.imagePosition == .right ? .left : .right,
                 to: messageLabel,
-                toAttribute: .Right,
+                toAttribute: .right,
                 value: options.contentInsets.right
             )
         }
@@ -245,9 +245,9 @@ public class BHToast: UIView {
      Starts the timer that hide the BHToast.
      */
     private func scheduledHideEvent() {
-        timer = NSTimer.scheduledTimerWithTimeInterval(
-            options.duration, target: self,
-            selector: "hide", userInfo: nil,
+        timer = Timer.scheduledTimer(
+            timeInterval: options.duration, target: self,
+            selector: #selector(hide), userInfo: nil,
             repeats: false
         )
     }
@@ -262,8 +262,8 @@ public class BHToast: UIView {
         
         setupProperties()
         
-        UIView.animateWithDuration(
-            options.animationDuration,
+        UIView.animate(
+            withDuration: options.animationDuration,
             animations: { () -> Void in
                 self.alpha = 1.0
             }, completion: { (finish) -> Void in
@@ -279,9 +279,9 @@ public class BHToast: UIView {
 
      - parameter showAgain: The flag that checks if is necessary to show again the view.
      */
-    private func hideWithAnimation(completionHandler completionHandler: () -> Void = {}) {
-        UIView.animateWithDuration(
-            options.animationDuration,
+    private func hideWithAnimation(completionHandler: @escaping () -> Void = {}) {
+        UIView.animate(
+            withDuration: options.animationDuration,
             animations: { () -> Void in
                 self.alpha = 0.0
             }, completion: { (finish) -> Void in
@@ -297,7 +297,7 @@ public class BHToast: UIView {
     /**
      Hides the BHToast with fade animation.
      */
-    public func hide() {
+    open func hide() {
         hideWithAnimation()
     }
     
@@ -308,8 +308,8 @@ public class BHToast: UIView {
      * If some BHToast with BHToastViewTag already exists in parent view, dismiss it to show the new BHToast.
      * Otherwise, just show the BHToast with fade animation.
      */
-    public func show() {
-        if isDescendantOfView(view) {
+    open func show() {
+        if isDescendant(of: view) {
             hideWithAnimation(completionHandler: { () -> Void in
                 self.showWithAnimation()
             })
@@ -336,9 +336,9 @@ public class BHToast: UIView {
      - parameter: value:            The value set in the constraint (default: 0.0).
      - parameter: priority:         The constraint priority (default: 1000).
      */
-    private func addConstraintFrom(from: AnyObject,
+    private func addConstraintFrom(_ from: AnyObject,
                                    fromAttribute: NSLayoutAttribute,
-                                   relatedBy: NSLayoutRelation = .Equal,
+                                   relatedBy: NSLayoutRelation = .equal,
                                    to: AnyObject,
                                    toAttribute: NSLayoutAttribute,
                                    multiplier: CGFloat = 1.0,
@@ -365,10 +365,10 @@ public class BHToast: UIView {
      - parameter element:   AnyObject
      - parameter rule:      String (examples: "<=200", ">300", "200")
      */
-    private func addHeightConstraintToElement(element: AnyObject, rule: String) {
+    private func addHeightConstraintToElement(_ element: AnyObject, rule: String) {
         element.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "V:[element(\(rule))]",
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[element(\(rule))]",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: [
@@ -384,10 +384,10 @@ public class BHToast: UIView {
      - parameter element:   AnyObject
      - parameter rule:      String (examples: "<=200", ">300", "200")
      */
-    private func addWidthConstraintToElement(element: AnyObject, rule: String) {
+    private func addWidthConstraintToElement(_ element: AnyObject, rule: String) {
         element.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat(
-                "H:[element(\(rule))]",
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "H:[element(\(rule))]",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
                 views: [

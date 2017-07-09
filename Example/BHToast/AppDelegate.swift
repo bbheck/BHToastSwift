@@ -16,11 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Overridden options default values
-        BHToastOptions.defaultBackgroundColor = UIColor.darkGrayColor()
+        BHToastOptions.defaultBackgroundColor = UIColor.darkGray
         BHToastOptions.defaultMaxHeight = 70.0
         
         return true
