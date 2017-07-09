@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.4.0 (2017-07-09)
+
+### Enhancements
+
+- Add two new positions. Now you can show the `BHToast` on the top, middle or bottom.
+- Create a `BHToastUtils` to access the top most view controller.
+- Change properties name (`bottomOffset` -> `margin`, `defaultBottomOffset` -> `defaultMargin`).
+
 ## 0.3.1 (2016-02-28)
 
 ### Enhancements
