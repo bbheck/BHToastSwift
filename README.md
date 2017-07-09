@@ -101,9 +101,9 @@ borderWidth: CGFloat
 cornerRadius: CGFloat
 ```
 
-* The bottom distance. *Default: 8.0*
+* The margin. *Default: 8.0*
 ```swift
-bottomOffset: CGFloat
+margin: CGFloat
 ```
 
 * The content insets. *Default: UIEdgeInsetsMake(8.0, 8.0, 8.0, 8.0)*
@@ -134,6 +134,11 @@ messageColor: UIColor
 * The message font. *Default: UIFont.systemFontOfSize(14.0)*
 ```swift
 messageFont: UIFont
+```
+
+* The view position. *Default: BHToastPosition.bottom*
+```
+position: BHToastPosition
 ```
 
 * The image position (if set). *Default: BHToastImagePosition.Left*
